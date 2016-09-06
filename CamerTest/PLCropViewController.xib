@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PLCropViewController" customModule="CamerTest" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ns5-Gk-WXJ">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pw6-Yp-7As">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iU1-df-dT5">
+                            <rect key="frame" x="240" y="669" width="46" height="30"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M6B-OT-OEb">
+                            <rect key="frame" x="8" y="26" width="46" height="30"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Pw6-Yp-7As" firstAttribute="centerX" secondItem="Ns5-Gk-WXJ" secondAttribute="centerX" id="JW9-I5-IZF"/>
+                        <constraint firstItem="Pw6-Yp-7As" firstAttribute="height" secondItem="Ns5-Gk-WXJ" secondAttribute="height" id="Mk0-5n-CFC"/>
+                        <constraint firstAttribute="trailing" secondItem="Pw6-Yp-7As" secondAttribute="trailing" id="TY6-qU-1T9"/>
+                        <constraint firstAttribute="bottom" secondItem="Pw6-Yp-7As" secondAttribute="bottom" id="Vd0-AB-pkh"/>
+                        <constraint firstItem="Pw6-Yp-7As" firstAttribute="centerY" secondItem="Ns5-Gk-WXJ" secondAttribute="centerY" id="ddM-fW-B2w"/>
+                        <constraint firstItem="Pw6-Yp-7As" firstAttribute="width" secondItem="Ns5-Gk-WXJ" secondAttribute="width" id="keQ-8z-IH5"/>
+                    </constraints>
+                </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ks-xT-ysz">
+                    <rect key="frame" x="0.0" y="161" width="414" height="414"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="2Ks-xT-ysz" secondAttribute="height" multiplier="1:1" id="4ge-gD-o07"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Ns5-Gk-WXJ" firstAttribute="leading" secondItem="2Ks-xT-ysz" secondAttribute="leading" id="5jG-10-hK9"/>
+                <constraint firstItem="2Ks-xT-ysz" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="6aB-xY-wsU"/>
+                <constraint firstItem="Ns5-Gk-WXJ" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="Al1-p2-RjY"/>
+                <constraint firstItem="Ns5-Gk-WXJ" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="Ndj-eY-Jvr"/>
+                <constraint firstItem="Ns5-Gk-WXJ" firstAttribute="centerY" secondItem="2Ks-xT-ysz" secondAttribute="centerY" id="c3V-oN-dAs"/>
+                <constraint firstItem="2Ks-xT-ysz" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gL8-BR-P0X"/>
+                <constraint firstItem="2Ks-xT-ysz" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="pUa-zJ-7gf"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+        </view>
+    </objects>
+</document>
