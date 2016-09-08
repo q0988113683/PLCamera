@@ -6,7 +6,7 @@ Customized Square Camera for Swift - easy to use
 
 
 
-# Full example:
+# Example:
 ```
 let camera =  PLCameraViewController(WidthAndHeight: 600)
        { image  in
