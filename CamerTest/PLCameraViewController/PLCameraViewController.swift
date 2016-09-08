@@ -136,25 +136,18 @@ class PLCameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
             try device!.lockForConfiguration()
             if (device?.flashMode == .Auto){
                 device?.flashMode = .On
-                btnFlash.imageView?.image = UIImage(named: "flashOn")
-                
+                btnFlash.setImage(UIImage(named: "flashOn") , forState: .Normal)
             }else if (device?.flashMode == .On){
                 device?.flashMode = .Off
-                btnFlash.imageView?.image = UIImage(named: "flashOff")
+                btnFlash.setImage(UIImage(named: "flashOff") , forState: .Normal)
             }else{
                 device?.flashMode = .Auto
-                btnFlash.imageView?.image = UIImage(named: "flashAuto")
+                btnFlash.setImage(UIImage(named: "flashAuto") , forState: .Normal)
             }
             device!.unlockForConfiguration()
         } catch _ { }
     }
     
-    
-    
-    
-   
-    
-
     
     // MARK: - imagePickerController Delegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
