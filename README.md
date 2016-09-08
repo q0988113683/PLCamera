@@ -8,13 +8,11 @@ Customized Square Camera for Swift - easy to use
 
 # Full example:
 ```
-   let camera =  PLCameraViewController(WidthAndHeight: 600)
-        { image  in
-            if (image != nil){
-                self.imageView.image = image
+let camera =  PLCameraViewController(WidthAndHeight: 600)
+       { image  in
+           if (image != nil){
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
-        
-        self.presentViewController(camera, animated: true, completion: nil)
+self.presentViewController(camera, animated: true, completion: nil)
 ```
