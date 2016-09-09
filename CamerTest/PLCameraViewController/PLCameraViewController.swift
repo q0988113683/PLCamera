@@ -60,11 +60,17 @@ class PLCameraViewController: UIViewController{
         self.view.addGestureRecognizer(tapGesture)
         self.view.userInteractionEnabled = true
         self.view.addSubview(focusView)
+        
+        
+       
     }
+    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         prevLayer?.frame.size = PLView.frame.size
+        
+        self.focusCamera(self.PLView.center)
     }
 
     
@@ -156,7 +162,11 @@ class PLCameraViewController: UIViewController{
      // MARK: - Private Method
     internal func focus(gesture: UITapGestureRecognizer) {
         let point = gesture.locationInView(self.view)
+        CameraAnimaion(point)
         
+    }
+    
+    internal func CameraAnimaion(point : CGPoint){
         guard focusCamera(point) else {
             return
         }
