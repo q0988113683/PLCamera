@@ -21,8 +21,8 @@ class ViewController: UIViewController {
         { image  in
             if (image != nil){
                 self.imageView.image = image
-                self.dismissViewControllerAnimated(true, completion: nil)
             }
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
         
         self.presentViewController(camera, animated: true, completion: nil)

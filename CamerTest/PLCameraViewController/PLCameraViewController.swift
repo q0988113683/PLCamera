@@ -61,10 +61,7 @@ class PLCameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
         super.viewDidAppear(animated)
         prevLayer?.frame.size = PLView.frame.size
     }
-    
-    
 
-    
     
     // MARK: - Btn Event
     @IBAction func switchCamera(sender: AnyObject) {
@@ -121,13 +118,14 @@ class PLCameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
                 }else{
                     self.onCompletion!(nil)
                 }
+                self.stopCamera()
             }
         }
     }
     
     @IBAction func ExitPhotoClick(sender: AnyObject){
         self.view.userInteractionEnabled = false
-        
+        self.stopCamera()
         self.onCompletion!(nil)
     }
     
@@ -265,6 +263,7 @@ class PLCameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
         self.prevLayer = nil
         self.device = nil
     }
+
     
     func createSession() {
         session = AVCaptureSession()

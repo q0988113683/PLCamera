@@ -69,7 +69,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtZ-KX-F9f">
-                    <rect key="frame" x="8" y="666" width="44" height="44"/>
+                    <rect key="frame" x="73" y="666" width="44" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="VvE-A8-i0m"/>
                         <constraint firstAttribute="width" constant="44" id="hNn-zt-fpR"/>
@@ -105,6 +105,8 @@
                 <constraint firstItem="dyA-l1-PaZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="167" id="lhS-kj-c33"/>
                 <constraint firstItem="5zT-3H-2Hq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mVL-6G-La4"/>
                 <constraint firstAttribute="bottom" secondItem="dyA-l1-PaZ" secondAttribute="bottom" constant="8" id="nad-eN-xId"/>
+                <constraint firstItem="dyA-l1-PaZ" firstAttribute="leading" secondItem="mtZ-KX-F9f" secondAttribute="trailing" constant="50" id="pSp-Yu-XMT"/>
+                <constraint firstItem="dyA-l1-PaZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qSt-O7-wLu"/>
                 <constraint firstItem="mtZ-KX-F9f" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="s8c-cd-Pvg"/>
                 <constraint firstItem="X1Z-oA-VmG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="v5w-uF-nU0"/>
                 <constraint firstItem="X8U-76-UNv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="x0G-Tt-pfL"/>
@@ -113,13 +115,20 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="HsC-66-Umx"/>
+                    <exclude reference="lhS-kj-c33"/>
+                    <exclude reference="s8c-cd-Pvg"/>
+                </mask>
+            </variation>
         </view>
     </objects>
     <resources>
         <image name="cameraButton" width="80" height="80"/>
-        <image name="closeButton" width="44" height="44"/>
-        <image name="flashOff" width="80" height="80"/>
-        <image name="libraryButton" width="44" height="44"/>
-        <image name="swapButton" width="44" height="44"/>
+        <image name="closeButton" width="16" height="16"/>
+        <image name="flashOff" width="35" height="35"/>
+        <image name="libraryButton" width="30" height="30"/>
+        <image name="swapButton" width="35" height="35"/>
     </resources>
 </document>
