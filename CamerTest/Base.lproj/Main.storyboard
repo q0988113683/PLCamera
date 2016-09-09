@@ -19,16 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Umu-Dj-07o">
-                                <rect key="frame" x="40" y="550" width="520" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.51372549020000002" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Camera">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="GotoTakePhoto" destination="BYZ-38-t0r" eventType="touchUpInside" id="T2i-8e-v1T"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yMr-60-lpi">
                                 <rect key="frame" x="100" y="100" width="400" height="400"/>
                                 <constraints>
@@ -37,15 +27,40 @@
                                     <constraint firstAttribute="height" constant="400" id="vJN-HZ-kND"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Umu-Dj-07o">
+                                <rect key="frame" x="100" y="550" width="400" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.51372549020000002" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="187" id="BzX-B3-4Yd"/>
+                                    <constraint firstAttribute="height" constant="30" id="ejM-hl-23v"/>
+                                </constraints>
+                                <state key="normal" title="Camera">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="BzX-B3-4Yd"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="GotoTakePhoto" destination="BYZ-38-t0r" eventType="touchUpInside" id="T2i-8e-v1T"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Umu-Dj-07o" firstAttribute="leading" secondItem="yMr-60-lpi" secondAttribute="leading" id="2ag-oU-khs"/>
                             <constraint firstItem="yMr-60-lpi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FTI-ir-jg1"/>
-                            <constraint firstItem="Umu-Dj-07o" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="Mqa-UY-dLW"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Umu-Dj-07o" secondAttribute="bottom" constant="20" id="TVA-ry-BRy"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Umu-Dj-07o" secondAttribute="bottom" constant="20" id="PP5-NQ-7uh"/>
                             <constraint firstItem="yMr-60-lpi" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="aoH-5J-u0v"/>
+                            <constraint firstItem="Umu-Dj-07o" firstAttribute="trailing" secondItem="yMr-60-lpi" secondAttribute="trailing" id="dHw-fF-XaC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Umu-Dj-07o" secondAttribute="trailing" constant="20" id="qEZ-gi-onL"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="qEZ-gi-onL"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="yMr-60-lpi" id="tdz-uA-QIY"/>

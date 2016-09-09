@@ -11,7 +11,7 @@ import AVFoundation
 
 public typealias TakeCameraCompletion = (UIImage?) -> Void
 
-class PLCameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate ,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class PLCameraViewController: UIViewController{
     
     
     @IBOutlet weak var PLView: UIView!
@@ -30,6 +30,11 @@ class PLCameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
         super.init(nibName: nil, bundle: nil)
         self.widthAndHeight = WidthAndHeight
         onCompletion = completion
+    }
+    
+    init(WidthAndHeight: CGFloat) {
+        super.init(nibName: nil, bundle: nil)
+        self.widthAndHeight = WidthAndHeight
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -90,13 +95,13 @@ class PLCameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
     }
     
     @IBAction func switchToAlbums(sender: AnyObject) {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
-            imagePicker.allowsEditing = true
-            self.presentViewController(imagePicker, animated: true, completion: nil)
+        
+        guard self.isAvailablePhotoLibrary() else {
+            onCompletion!(nil)
+            return
         }
+        
+        self.presentViewController( self.CreateImagePicker() , animated: true, completion: nil)
     }
     
     @IBAction func takePhotoClick(sender: AnyObject){
@@ -147,16 +152,7 @@ class PLCameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
     }
     
     
-    // MARK: - imagePickerController Delegate
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        self.onCompletion!(self.resizeImage(image!, newWidth: self.widthAndHeight, newHeight: self.widthAndHeight))
-        self.stopCamera()
-        self.dismissViewControllerAnimated(true, completion: nil);
-    }
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
+
      // MARK: - Private Method
     internal func focus(gesture: UITapGestureRecognizer) {
         let point = gesture.locationInView(self.view)
@@ -244,7 +240,7 @@ class PLCameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
         
         return image
     }
-    
+
     func resizeImage(image: UIImage, newWidth: CGFloat , newHeight: CGFloat) -> UIImage {
         UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
         image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
@@ -253,7 +249,7 @@ class PLCameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
         
         return newImage
     }
-    
+
     func stopCamera() {
         self.session?.stopRunning()
         self.prevLayer?.removeFromSuperlayer()
@@ -328,4 +324,30 @@ class PLCameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
             return .Portrait
         }
     }
+    
+    func CreateImagePicker() -> UIImagePickerController{
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+        imagePicker.allowsEditing = true
+        return imagePicker
+        
+    }
+    
+    func isAvailablePhotoLibrary() -> Bool{
+         return UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
+    }
+}
+
+extension PLCameraViewController : UIImagePickerControllerDelegate , UINavigationControllerDelegate{
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        self.onCompletion!(self.resizeImage(image!, newWidth: self.widthAndHeight, newHeight: self.widthAndHeight))
+        self.stopCamera()
+        self.dismissViewControllerAnimated(true, completion: nil);
+    }
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }
