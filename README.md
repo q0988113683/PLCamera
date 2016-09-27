@@ -4,7 +4,7 @@ Customized Square Camera for Swift - easy to use
 
 # Photo
 
-
+![](https://github.com/q0988113683/PLCamera/blob/master/IMG_4195.PNG)
 
 # Example:
 ```
