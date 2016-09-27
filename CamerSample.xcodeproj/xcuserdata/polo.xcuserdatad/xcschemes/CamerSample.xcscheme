@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E56226921D7BEAD600DD1E36"
-               BuildableName = "CamerTest.app"
-               BlueprintName = "CamerTest"
-               ReferencedContainer = "container:CamerTest.xcodeproj">
+               BuildableName = "CamerSample.app"
+               BlueprintName = "CamerSample"
+               ReferencedContainer = "container:CamerSample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E56226921D7BEAD600DD1E36"
-            BuildableName = "CamerTest.app"
-            BlueprintName = "CamerTest"
-            ReferencedContainer = "container:CamerTest.xcodeproj">
+            BuildableName = "CamerSample.app"
+            BlueprintName = "CamerSample"
+            ReferencedContainer = "container:CamerSample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E56226921D7BEAD600DD1E36"
-            BuildableName = "CamerTest.app"
-            BlueprintName = "CamerTest"
-            ReferencedContainer = "container:CamerTest.xcodeproj">
+            BuildableName = "CamerSample.app"
+            BlueprintName = "CamerSample"
+            ReferencedContainer = "container:CamerSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E56226921D7BEAD600DD1E36"
-            BuildableName = "CamerTest.app"
-            BlueprintName = "CamerTest"
-            ReferencedContainer = "container:CamerTest.xcodeproj">
+            BuildableName = "CamerSample.app"
+            BlueprintName = "CamerSample"
+            ReferencedContainer = "container:CamerSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

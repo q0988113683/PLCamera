@@ -26,7 +26,7 @@ class PLCameraViewController: UIViewController{
     @IBOutlet weak var focusView: UIView!
     @IBOutlet weak var btnFlash: UIButton!
     
-    init(WidthAndHeight: CGFloat , completion: TakeCameraCompletion) {
+    init(WidthAndHeight: CGFloat , completion: @escaping TakeCameraCompletion) {
         super.init(nibName: nil, bundle: nil)
         self.widthAndHeight = WidthAndHeight
         onCompletion = completion
@@ -47,8 +47,8 @@ class PLCameraViewController: UIViewController{
         createSession()
         
         focusView.layer.borderWidth = 1.0
-        focusView.layer.borderColor = UIColor(red: 181.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0).CGColor
-        focusView.hidden = true
+        focusView.layer.borderColor = UIColor(red: 181.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0).cgColor
+        focusView.isHidden = true
         
         
         if let gestureRecognizers = self.view.gestureRecognizers {
@@ -58,15 +58,12 @@ class PLCameraViewController: UIViewController{
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(focus(_:)))
         self.view.addGestureRecognizer(tapGesture)
-        self.view.userInteractionEnabled = true
+        self.view.isUserInteractionEnabled = true
         self.view.addSubview(focusView)
-        
-        
-       
     }
     
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         prevLayer?.frame.size = PLView.frame.size
         
@@ -75,15 +72,15 @@ class PLCameraViewController: UIViewController{
 
     
     // MARK: - Btn Event
-    @IBAction func switchCamera(sender: AnyObject) {
+    @IBAction func switchCamera(_ sender: AnyObject) {
         if let sess = session {
             let currentCameraInput: AVCaptureInput = sess.inputs[0] as! AVCaptureInput
             sess.removeInput(currentCameraInput)
             var newCamera: AVCaptureDevice
-            if (currentCameraInput as! AVCaptureDeviceInput).device.position == .Back {
-                newCamera = self.cameraWithPosition(.Front)!
+            if (currentCameraInput as! AVCaptureDeviceInput).device.position == .back {
+                newCamera = self.cameraWithPosition(.front)!
             } else {
-                newCamera = self.cameraWithPosition(.Back)!
+                newCamera = self.cameraWithPosition(.back)!
             }
             
             
@@ -100,25 +97,25 @@ class PLCameraViewController: UIViewController{
         }
     }
     
-    @IBAction func switchToAlbums(sender: AnyObject) {
+    @IBAction func switchToAlbums(_ sender: AnyObject) {
         
         guard self.isAvailablePhotoLibrary() else {
             onCompletion!(nil)
             return
         }
         
-        self.presentViewController( self.CreateImagePicker() , animated: true, completion: nil)
+        self.present( self.CreateImagePicker() , animated: true, completion: nil)
     }
     
-    @IBAction func takePhotoClick(sender: AnyObject){
-        self.view.userInteractionEnabled = false
+    @IBAction func takePhotoClick(_ sender: AnyObject){
+        self.view.isUserInteractionEnabled = false
         
-        if let videoConnection = imageOutput.connectionWithMediaType(AVMediaTypeVideo) {
-            imageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection) {
+        if let videoConnection = imageOutput.connection(withMediaType: AVMediaTypeVideo) {
+            imageOutput.captureStillImageAsynchronously(from: videoConnection) {
                 (imageDataSampleBuffer, error) -> Void in
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
                 
-                var image = UIImage(data: imageData)
+                var image = UIImage(data: imageData!)
                 
                 if (image != nil){
                     
@@ -134,8 +131,8 @@ class PLCameraViewController: UIViewController{
         }
     }
     
-    @IBAction func ExitPhotoClick(sender: AnyObject){
-        self.view.userInteractionEnabled = false
+    @IBAction func ExitPhotoClick(_ sender: AnyObject){
+        self.view.isUserInteractionEnabled = false
         self.stopCamera()
         self.onCompletion!(nil)
     }
@@ -143,15 +140,15 @@ class PLCameraViewController: UIViewController{
     @IBAction func FlashClick(){
         do {
             try device!.lockForConfiguration()
-            if (device?.flashMode == .Auto){
-                device?.flashMode = .On
-                btnFlash.setImage(UIImage(named: "flashOn") , forState: .Normal)
-            }else if (device?.flashMode == .On){
-                device?.flashMode = .Off
-                btnFlash.setImage(UIImage(named: "flashOff") , forState: .Normal)
+            if (device?.flashMode == .auto){
+                device?.flashMode = .on
+                btnFlash.setImage(UIImage(named: "flashOn") , for: UIControlState())
+            }else if (device?.flashMode == .on){
+                device?.flashMode = .off
+                btnFlash.setImage(UIImage(named: "flashOff") , for: UIControlState())
             }else{
-                device?.flashMode = .Auto
-                btnFlash.setImage(UIImage(named: "flashAuto") , forState: .Normal)
+                device?.flashMode = .auto
+                btnFlash.setImage(UIImage(named: "flashAuto") , for: UIControlState())
             }
             device!.unlockForConfiguration()
         } catch _ { }
@@ -160,47 +157,51 @@ class PLCameraViewController: UIViewController{
     
 
      // MARK: - Private Method
-    internal func focus(gesture: UITapGestureRecognizer) {
-        let point = gesture.locationInView(self.view)
+    internal func focus(_ gesture: UITapGestureRecognizer) {
+        let point = gesture.location(in: self.view)
         CameraAnimaion(point)
         
     }
     
-    internal func CameraAnimaion(point : CGPoint){
+    internal func CameraAnimaion(_ point : CGPoint){
         guard focusCamera(point) else {
             return
         }
         
-        focusView.hidden = false
+        focusView.isHidden = false
         focusView.center = point
         focusView.alpha = 0
-        focusView.transform = CGAffineTransformMakeScale(1.2, 1.2)
+        focusView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         
-        self.view.bringSubviewToFront(focusView)
+        self.view.bringSubview(toFront: focusView)
         
-        UIView.animateKeyframesWithDuration(1.5, delay: 0, options: UIViewKeyframeAnimationOptions(), animations: {
+        UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: UIViewKeyframeAnimationOptions(), animations: {
             
-            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0.15, animations: { () -> Void in
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.15, animations: { () -> Void in
                 self.focusView.alpha = 1
-                self.focusView.transform = CGAffineTransformIdentity
+                self.focusView.transform = CGAffineTransform.identity
             })
             
-            UIView.addKeyframeWithRelativeStartTime(0.80, relativeDuration: 0.20, animations: { () -> Void in
+            UIView.addKeyframe(withRelativeStartTime: 0.80, relativeDuration: 0.20, animations: { () -> Void in
                 self.focusView.alpha = 0
-                self.focusView.transform = CGAffineTransformMakeScale(0.8, 0.8)
+                self.focusView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
             })
             
             
             }, completion: { finished in
                 if finished {
-                    self.focusView.hidden = true
+                    self.focusView.isHidden = true
                 }
         })
     }
     
-    internal func focusCamera(toPoint: CGPoint) -> Bool {
+    @discardableResult internal func focusCamera(_ toPoint: CGPoint) -> Bool {
         
-        guard let device = device where device.isFocusModeSupported(.ContinuousAutoFocus) else {
+        guard toPoint.y > self.PLView.frame.origin.y && toPoint.y < self.PLView.frame.origin.y + self.PLView.frame.size.height else {
+            return false
+        }
+        
+        guard let device = device , device.isFocusModeSupported(.continuousAutoFocus) else {
             return false
         }
         
@@ -211,15 +212,15 @@ class PLCameraViewController: UIViewController{
         // focus points are in the range of 0...1, not screen pixels
         let focusPoint = CGPoint(x: toPoint.x / self.view.frame.width, y: toPoint.y / self.view.frame.height)
         
-        device.focusMode = AVCaptureFocusMode.ContinuousAutoFocus
+        device.focusMode = AVCaptureFocusMode.continuousAutoFocus
         device.exposurePointOfInterest = focusPoint
-        device.exposureMode = AVCaptureExposureMode.ContinuousAutoExposure
+        device.exposureMode = AVCaptureExposureMode.continuousAutoExposure
         device.unlockForConfiguration()
         
         return true
     }
     
-    func cropCameraImage(original: UIImage, previewLayer: AVCaptureVideoPreviewLayer) -> UIImage? {
+    func cropCameraImage(_ original: UIImage, previewLayer: AVCaptureVideoPreviewLayer) -> UIImage? {
         
         var image = UIImage()
         
@@ -229,12 +230,12 @@ class PLCameraViewController: UIViewController{
         let originalHeight = original.size.height
         
         let A = previewImageLayerBounds.origin
-        let B = CGPointMake(previewImageLayerBounds.size.width, previewImageLayerBounds.origin.y)
-        let D = CGPointMake(previewImageLayerBounds.size.width, previewImageLayerBounds.size.height)
+        let B = CGPoint(x: previewImageLayerBounds.size.width, y: previewImageLayerBounds.origin.y)
+        let D = CGPoint(x: previewImageLayerBounds.size.width, y: previewImageLayerBounds.size.height)
         
-        let a = previewLayer.captureDevicePointOfInterestForPoint(A)
-        let b = previewLayer.captureDevicePointOfInterestForPoint(B)
-        let d = previewLayer.captureDevicePointOfInterestForPoint(D)
+        let a = previewLayer.captureDevicePointOfInterest(for: A)
+        let b = previewLayer.captureDevicePointOfInterest(for: B)
+        let d = previewLayer.captureDevicePointOfInterest(for: D)
         
         let posX = floor(b.x * originalHeight)
         let posY = floor(b.y * originalWidth)
@@ -242,22 +243,22 @@ class PLCameraViewController: UIViewController{
         let width: CGFloat = d.x * originalHeight - b.x * originalHeight
         let height: CGFloat = a.y * originalWidth - b.y * originalWidth
         
-        let cropRect = CGRectMake(posX, posY, width, height)
+        let cropRect = CGRect(x: posX, y: posY, width: width, height: height)
         
-        if let imageRef = CGImageCreateWithImageInRect(original.CGImage, cropRect) {
-            image = UIImage(CGImage: imageRef, scale: original.scale, orientation: original.imageOrientation)
+        if let imageRef = original.cgImage?.cropping(to: cropRect) {
+            image = UIImage(cgImage: imageRef, scale: original.scale, orientation: original.imageOrientation)
         }
         
         return image
     }
 
-    func resizeImage(image: UIImage, newWidth: CGFloat , newHeight: CGFloat) -> UIImage {
-        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
-        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+    func resizeImage(_ image: UIImage, newWidth: CGFloat , newHeight: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImage
+        return newImage!
     }
 
     func stopCamera() {
@@ -273,7 +274,7 @@ class PLCameraViewController: UIViewController{
     
     func createSession() {
         session = AVCaptureSession()
-        device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         do {
             input = try AVCaptureDeviceInput(device: device)
@@ -302,62 +303,62 @@ class PLCameraViewController: UIViewController{
         session?.startRunning()
     }
     
-    func cameraWithPosition(position: AVCaptureDevicePosition) -> AVCaptureDevice? {
-        let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
-        for device in devices {
-            if device.position == position {
+    func cameraWithPosition(_ position: AVCaptureDevicePosition) -> AVCaptureDevice? {
+        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
+        for device in devices! {
+            if (device as AnyObject).position == position {
                 return device as? AVCaptureDevice
             }
         }
         return nil
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animateAlongsideTransition({ (context) -> Void in
-            self.prevLayer?.connection.videoOrientation = self.transformOrientation(UIInterfaceOrientation(rawValue: UIApplication.sharedApplication().statusBarOrientation.rawValue)!)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { (context) -> Void in
+            self.prevLayer?.connection.videoOrientation = self.transformOrientation(UIInterfaceOrientation(rawValue: UIApplication.shared.statusBarOrientation.rawValue)!)
             self.prevLayer?.frame.size = self.PLView.frame.size
             }, completion: { (context) -> Void in
                 
         })
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        super.viewWillTransition(to: size, with: coordinator)
     }
     
-    func transformOrientation(orientation: UIInterfaceOrientation) -> AVCaptureVideoOrientation {
+    func transformOrientation(_ orientation: UIInterfaceOrientation) -> AVCaptureVideoOrientation {
         switch orientation {
-        case .LandscapeLeft:
-            return .LandscapeLeft
-        case .LandscapeRight:
-            return .LandscapeRight
-        case .PortraitUpsideDown:
-            return .PortraitUpsideDown
+        case .landscapeLeft:
+            return .landscapeLeft
+        case .landscapeRight:
+            return .landscapeRight
+        case .portraitUpsideDown:
+            return .portraitUpsideDown
         default:
-            return .Portrait
+            return .portrait
         }
     }
     
     func CreateImagePicker() -> UIImagePickerController{
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
         imagePicker.allowsEditing = true
         return imagePicker
         
     }
     
     func isAvailablePhotoLibrary() -> Bool{
-         return UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
+         return UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary)
     }
 }
 
 extension PLCameraViewController : UIImagePickerControllerDelegate , UINavigationControllerDelegate{
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!) {
         self.onCompletion!(self.resizeImage(image!, newWidth: self.widthAndHeight, newHeight: self.widthAndHeight))
         self.stopCamera()
-        self.dismissViewControllerAnimated(true, completion: nil);
+        self.dismiss(animated: true, completion: nil);
     }
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

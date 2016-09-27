@@ -10,7 +10,7 @@ class ViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
     }
@@ -22,10 +22,10 @@ class ViewController: UIViewController {
             if (image != nil){
                 self.imageView.image = image
             }
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
-        self.presentViewController(camera, animated: true, completion: nil)
+        self.present(camera, animated: true, completion: nil)
     }
 
     

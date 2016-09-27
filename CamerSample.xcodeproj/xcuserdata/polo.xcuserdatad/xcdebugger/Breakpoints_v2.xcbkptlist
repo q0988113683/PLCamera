@@ -17,38 +17,86 @@
             endingLineNumber = "117"
             landmarkName = "switchCamera(_:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CamerTest/PLCameraViewController/PLCameraViewController.swift"
+            timestampString = "496684969.784457"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "focusCamera(_:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "CamerTest.PLCameraViewController.switchCamera (Swift.AnyObject) -&gt; ()"
-                  moduleName = "CamerTest"
+                  symbolName = "CamerSample.PLCameraViewController.focusCamera (__C.CGPoint) -&gt; Swift.Bool"
+                  moduleName = "CamerSample"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/polo/Google%20Drive/IOSProject/CamerTest/CamerTest/PLCameraViewController.swift"
-                  timestampString = "494676900.544056"
+                  urlString = "file:///Users/polo/PLCamera/CamerTest/PLCameraViewController/PLCameraViewController.swift"
+                  timestampString = "496685015.814751"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "117"
-                  endingLineNumber = "117"
-                  offsetFromSymbolStart = "40">
+                  startingLineNumber = "207"
+                  endingLineNumber = "207"
+                  offsetFromSymbolStart = "856">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "CamerTest.PLCameraViewController.switchCamera (Swift.AnyObject) -&gt; ()"
-                  moduleName = "CamerTest"
+                  symbolName = "CamerSample.PLCameraViewController.focusCamera (__C.CGPoint) -&gt; Swift.Bool"
+                  moduleName = "CamerSample"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/polo/Google%20Drive/IOSProject/CamerTest/CamerTest/PLCameraViewController.swift"
-                  timestampString = "494676900.54423"
+                  urlString = "file:///Users/polo/PLCamera/CamerTest/PLCameraViewController/PLCameraViewController.swift"
+                  timestampString = "496685015.816892"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "117"
-                  endingLineNumber = "117"
-                  offsetFromSymbolStart = "92">
+                  startingLineNumber = "207"
+                  endingLineNumber = "207"
+                  offsetFromSymbolStart = "904">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CamerTest/PLCameraViewController/PLCameraViewController.swift"
+            timestampString = "496684816.261472"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "CameraAnimaion(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CamerTest/PLCameraViewController/PLCameraViewController.swift"
+            timestampString = "496684991.550858"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
+            landmarkName = "focusCamera(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
