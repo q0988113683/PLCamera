@@ -4,10 +4,9 @@
 //
 //  Created by Yu chengJhuo on 9/4/16.
 //  Copyright © 2016 Yu-cheng Jhuo. All rights reserved.
-
 import UIKit
 import AVFoundation
-
+import Photos
 
 public typealias TakeCameraCompletion = (UIImage?) -> Void
 
@@ -22,14 +21,25 @@ class PLCameraViewController: UIViewController{
     var imageOutput: AVCaptureStillImageOutput!
     var prevLayer: AVCaptureVideoPreviewLayer?
     var widthAndHeight : CGFloat = 500
-    
+    var switchCamera  = false
     @IBOutlet weak var focusView: UIView!
     @IBOutlet weak var btnFlash: UIButton!
+    
+    var isCloseCamera = false
     
     init(WidthAndHeight: CGFloat , completion: @escaping TakeCameraCompletion) {
         super.init(nibName: nil, bundle: nil)
         self.widthAndHeight = WidthAndHeight
         onCompletion = completion
+    }
+    
+    init(WidthAndHeight: CGFloat , switchCamera : Bool ,  completion: @escaping TakeCameraCompletion) {
+        super.init(nibName: nil, bundle: nil)
+        self.widthAndHeight = WidthAndHeight
+        onCompletion = completion
+        
+        self.switchCamera = switchCamera
+        
     }
     
     init(WidthAndHeight: CGFloat) {
@@ -55,21 +65,29 @@ class PLCameraViewController: UIViewController{
             gestureRecognizers.forEach({ self.view.removeGestureRecognizer($0) })
         }
         
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(focus(_:)))
         self.view.addGestureRecognizer(tapGesture)
         self.view.isUserInteractionEnabled = true
         self.view.addSubview(focusView)
+        if  switchCamera == true  && input != nil{
+            self.switchCamera(switchCamera as AnyObject)
+        }
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if (isCloseCamera){
+            self.ShowOpenCameraAlert()
+        }
+        
+        
         prevLayer?.frame.size = PLView.frame.size
         
         self.focusCamera(self.PLView.center)
     }
-
+    
     
     // MARK: - Btn Event
     @IBAction func switchCamera(_ sender: AnyObject) {
@@ -83,7 +101,6 @@ class PLCameraViewController: UIViewController{
                 newCamera = self.cameraWithPosition(.back)!
             }
             
-            
             do {
                 let newVideoInput = try AVCaptureDeviceInput(device: newCamera)
                 if session!.canAddInput(newVideoInput) {
@@ -91,6 +108,7 @@ class PLCameraViewController: UIViewController{
                 }
             } catch let error as NSError {
                 input = nil
+                self.isCloseCamera = true
                 print("Error: \(error.localizedDescription)")
                 return
             }
@@ -110,28 +128,41 @@ class PLCameraViewController: UIViewController{
     @IBAction func takePhotoClick(_ sender: AnyObject){
         self.view.isUserInteractionEnabled = false
         
+        guard imageOutput != nil else {
+            return
+        }
+        
+        
         if let videoConnection = imageOutput.connection(withMediaType: AVMediaTypeVideo) {
             imageOutput.captureStillImageAsynchronously(from: videoConnection) {
                 (imageDataSampleBuffer, error) -> Void in
-                let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
                 
-                var image = UIImage(data: imageData!)
-                
-                if (image != nil){
+                if (imageDataSampleBuffer != nil){
+                    let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
                     
-                    //crop image like PLView
-                    image = self.cropCameraImage(image!, previewLayer: self.prevLayer!)
-                    self.onCompletion!(self.resizeImage(image!, newWidth: self.widthAndHeight, newHeight: self.widthAndHeight))
+                    var image = UIImage(data: imageData!)
                     
-                }else{
-                    self.onCompletion!(nil)
+                    if (image != nil){
+                        
+                        //crop image like PLView
+                        image = self.cropCameraImage(image!, previewLayer: self.prevLayer!)
+                        self.onCompletion!(self.resizeImage(image!, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight))
+                        
+                    }else{
+                        self.onCompletion!(nil)
+                    }
+                    self.stopCamera()
                 }
-                self.stopCamera()
             }
         }
     }
     
     @IBAction func ExitPhotoClick(_ sender: AnyObject){
+        self.ExitView()
+        
+    }
+    
+    func ExitView() {
         self.view.isUserInteractionEnabled = false
         self.stopCamera()
         self.onCompletion!(nil)
@@ -155,8 +186,8 @@ class PLCameraViewController: UIViewController{
     }
     
     
-
-     // MARK: - Private Method
+    
+    // MARK: - Private Method
     internal func focus(_ gesture: UITapGestureRecognizer) {
         let point = gesture.location(in: self.view)
         CameraAnimaion(point)
@@ -188,10 +219,10 @@ class PLCameraViewController: UIViewController{
             })
             
             
-            }, completion: { finished in
-                if finished {
-                    self.focusView.isHidden = true
-                }
+        }, completion: { finished in
+            if finished {
+                self.focusView.isHidden = true
+            }
         })
     }
     
@@ -251,16 +282,23 @@ class PLCameraViewController: UIViewController{
         
         return image
     }
-
-    func resizeImage(_ image: UIImage, newWidth: CGFloat , newHeight: CGFloat) -> UIImage {
+    
+    func resizeImage(_ image: UIImage, newWidthX: CGFloat , newHeightX: CGFloat) -> UIImage {
+        var newWidth = newWidthX
+        var newHeight = newHeightX
+        if (image.size.width < newWidth){
+            newWidth = image.size.width
+            newHeight = image.size.width
+        }
+        //        let scale = newWidth / image.size.width
+        //        let newHeight = image.size.height * scale
         UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
         image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
         return newImage!
     }
-
+    
     func stopCamera() {
         self.session?.stopRunning()
         self.prevLayer?.removeFromSuperlayer()
@@ -270,7 +308,7 @@ class PLCameraViewController: UIViewController{
         self.prevLayer = nil
         self.device = nil
     }
-
+    
     
     func createSession() {
         session = AVCaptureSession()
@@ -280,6 +318,7 @@ class PLCameraViewController: UIViewController{
             input = try AVCaptureDeviceInput(device: device)
         } catch let error as NSError {
             input = nil
+            self.isCloseCamera = true
             print("Error: \(error.localizedDescription)")
             return
         }
@@ -303,6 +342,27 @@ class PLCameraViewController: UIViewController{
         session?.startRunning()
     }
     
+    func ShowOpenCameraAlert() {
+        
+        let alert = UIAlertController(title: "", message: "Please Allow Access to Your Camera.\n Go Setting", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
+             self.ExitView()
+        }))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.openURL(settingsUrl)
+            }
+            self.ExitView()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
     func cameraWithPosition(_ position: AVCaptureDevicePosition) -> AVCaptureDevice? {
         let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
         for device in devices! {
@@ -317,8 +377,8 @@ class PLCameraViewController: UIViewController{
         coordinator.animate(alongsideTransition: { (context) -> Void in
             self.prevLayer?.connection.videoOrientation = self.transformOrientation(UIInterfaceOrientation(rawValue: UIApplication.shared.statusBarOrientation.rawValue)!)
             self.prevLayer?.frame.size = self.PLView.frame.size
-            }, completion: { (context) -> Void in
-                
+        }, completion: { (context) -> Void in
+            
         })
         super.viewWillTransition(to: size, with: coordinator)
     }
@@ -337,28 +397,67 @@ class PLCameraViewController: UIViewController{
     }
     
     func CreateImagePicker() -> UIImagePickerController{
-        let imagePicker = UIImagePickerController()
+        
+        let imagePicker = LightStatusImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
+        imagePicker.navigationBar.barTintColor = UIColor.black
+        imagePicker.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        imagePicker.navigationBar.tintColor =  .white
         return imagePicker
         
     }
     
     func isAvailablePhotoLibrary() -> Bool{
-         return UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary)
+        return UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary)
     }
 }
 
 extension PLCameraViewController : UIImagePickerControllerDelegate , UINavigationControllerDelegate{
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!) {
-        self.onCompletion!(self.resizeImage(image!, newWidth: self.widthAndHeight, newHeight: self.widthAndHeight))
-        self.stopCamera()
-        self.dismiss(animated: true, completion: nil);
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let image:UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        if (image.size.width != image.size.height){
+            self.stopCamera()
+            self.dismiss(animated: true, completion: nil);
+            
+            let imageUrl = info["UIImagePickerControllerReferenceURL"]
+            let asset = PHAsset.fetchAssets(withALAssetURLs: [imageUrl as! URL], options: nil).firstObject
+            
+            if (asset != nil){
+                let confirmController = ConfirmViewController(phasset: asset!, image: image)
+                confirmController.onComplete = { image in
+                    if let image = image {
+                        self.onCompletion!(self.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight))
+                    }
+                    self.stopCamera()
+                    self.dismiss(animated: true, completion: nil);
+                }
+                confirmController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                self.present(confirmController, animated: true, completion: nil)
+            }else{
+                
+                self.onCompletion!(self.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight))
+                self.stopCamera()
+                self.dismiss(animated: true, completion: nil);
+            }
+        }else{
+            
+            
+            self.onCompletion!(self.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight))
+            self.stopCamera()
+            self.dismiss(animated: true, completion: nil);
+        }
     }
+
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
     }
     
 }
+
+
+
+
