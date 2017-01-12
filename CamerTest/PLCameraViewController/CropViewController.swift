@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-public class ConfirmViewController: UIViewController, UIScrollViewDelegate {
+public class CropViewController: UIViewController, UIScrollViewDelegate {
     
     let imageView = UIImageView()
     @IBOutlet weak var scrollView: UIScrollView!
@@ -29,7 +29,7 @@ public class ConfirmViewController: UIViewController, UIScrollViewDelegate {
     public init(phasset: PHAsset , image:UIImage) {
         self.asset = phasset
         self.origanImage  = image
-        super.init(nibName: "ConfirmViewController", bundle: nil)
+        super.init(nibName: "CropViewController", bundle: nil)
     }
     
     public required init?(coder aDecoder: NSCoder) {

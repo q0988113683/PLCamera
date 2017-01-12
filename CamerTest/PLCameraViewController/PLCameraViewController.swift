@@ -146,12 +146,30 @@ class PLCameraViewController: UIViewController{
                         
                         //crop image like PLView
                         image = self.cropCameraImage(image!, previewLayer: self.prevLayer!)
-                        self.onCompletion!(self.resizeImage(image!, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight))
+                        image = self.resizeImage(image!, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight)
+                        
+                        
+                        let filterController = FilterViewController(image: image!)
+                        filterController.onComplete = { image in
+                            if var image = image {
+                                self.onCompletion!(image)
+                                self.stopCamera()
+                            }else{
+                                self.view.isUserInteractionEnabled = true
+                            }
+                           
+                            self.dismiss(animated: true, completion: nil);
+                        }
+                        let nav = UINavigationController(rootViewController: filterController)
+                        nav.navigationBar.barTintColor = UIColor.black
+                        self.present(nav, animated: true, completion: nil)
+                        
                         
                     }else{
                         self.onCompletion!(nil)
+                        self.stopCamera()
                     }
-                    self.stopCamera()
+                    
                 }
             }
         }
@@ -420,23 +438,42 @@ extension PLCameraViewController : UIImagePickerControllerDelegate , UINavigatio
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image:UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         if (image.size.width != image.size.height){
-            self.stopCamera()
+            //self.stopCamera()
             self.dismiss(animated: true, completion: nil);
             
             let imageUrl = info["UIImagePickerControllerReferenceURL"]
             let asset = PHAsset.fetchAssets(withALAssetURLs: [imageUrl as! URL], options: nil).firstObject
             
             if (asset != nil){
-                let confirmController = ConfirmViewController(phasset: asset!, image: image)
+                let confirmController = CropViewController(phasset: asset!, image: image)
                 confirmController.onComplete = { image in
-                    if let image = image {
-                        self.onCompletion!(self.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight))
+                   
+                    if var image = image {
+                        image = self.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight)
+                        
+                        let filterController = FilterViewController(image: image)
+                        
+                        filterController.onComplete = { image in
+                             if var image = image {
+                                self.onCompletion!(image)
+                                self.stopCamera()
+                             }else{
+                            }
+                            self.dismiss(animated: true, completion: nil);
+                        }
+                        confirmController.navigationController?.pushViewController(filterController, animated: true)
+                        
+                      
+                    }else{
+                         self.dismiss(animated: true, completion: nil);
                     }
-                    self.stopCamera()
-                    self.dismiss(animated: true, completion: nil);
                 }
+             
                 confirmController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                self.present(confirmController, animated: true, completion: nil)
+                let nav = UINavigationController(rootViewController: confirmController)
+                nav.navigationBar.barTintColor = UIColor.black
+                self.present(nav, animated: true, completion: nil)
+                
             }else{
                 
                 self.onCompletion!(self.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight))

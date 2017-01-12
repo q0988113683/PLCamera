@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		18C9DE5C1E262B0C00A9A07B /* CropOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9DE591E262B0C00A9A07B /* CropOverlay.swift */; };
-		18C9DE5D1E262B0C00A9A07B /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9DE5A1E262B0C00A9A07B /* ConfirmViewController.swift */; };
-		18C9DE5E1E262B0C00A9A07B /* ConfirmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C9DE5B1E262B0C00A9A07B /* ConfirmViewController.xib */; };
+		18C9DE5D1E262B0C00A9A07B /* CropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9DE5A1E262B0C00A9A07B /* CropViewController.swift */; };
+		18C9DE5E1E262B0C00A9A07B /* CropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C9DE5B1E262B0C00A9A07B /* CropViewController.xib */; };
 		18C9DE601E262E4600A9A07B /* LightStatusImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9DE5F1E262E4600A9A07B /* LightStatusImagePickerController.swift */; };
+		18C9DE631E271F5300A9A07B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9DE611E271F5300A9A07B /* FilterViewController.swift */; };
+		18C9DE641E271F5300A9A07B /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C9DE621E271F5300A9A07B /* FilterViewController.xib */; };
 		18EDBDAC1D81614D008E4408 /* Camera.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18EDBDA91D81614D008E4408 /* Camera.xcassets */; };
 		18EDBDAD1D81614D008E4408 /* PLCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EDBDAA1D81614D008E4408 /* PLCameraViewController.swift */; };
 		18EDBDAE1D81614D008E4408 /* PLCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EDBDAB1D81614D008E4408 /* PLCameraViewController.xib */; };
@@ -41,9 +43,11 @@
 
 /* Begin PBXFileReference section */
 		18C9DE591E262B0C00A9A07B /* CropOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropOverlay.swift; sourceTree = "<group>"; };
-		18C9DE5A1E262B0C00A9A07B /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
-		18C9DE5B1E262B0C00A9A07B /* ConfirmViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmViewController.xib; sourceTree = "<group>"; };
+		18C9DE5A1E262B0C00A9A07B /* CropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropViewController.swift; sourceTree = "<group>"; };
+		18C9DE5B1E262B0C00A9A07B /* CropViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CropViewController.xib; sourceTree = "<group>"; };
 		18C9DE5F1E262E4600A9A07B /* LightStatusImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightStatusImagePickerController.swift; sourceTree = "<group>"; };
+		18C9DE611E271F5300A9A07B /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		18C9DE621E271F5300A9A07B /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
 		18EDBDA91D81614D008E4408 /* Camera.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Camera.xcassets; sourceTree = "<group>"; };
 		18EDBDAA1D81614D008E4408 /* PLCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PLCameraViewController.swift; sourceTree = "<group>"; };
 		18EDBDAB1D81614D008E4408 /* PLCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLCameraViewController.xib; sourceTree = "<group>"; };
@@ -89,12 +93,14 @@
 			isa = PBXGroup;
 			children = (
 				18C9DE591E262B0C00A9A07B /* CropOverlay.swift */,
-				18C9DE5A1E262B0C00A9A07B /* ConfirmViewController.swift */,
-				18C9DE5B1E262B0C00A9A07B /* ConfirmViewController.xib */,
+				18C9DE5A1E262B0C00A9A07B /* CropViewController.swift */,
+				18C9DE5B1E262B0C00A9A07B /* CropViewController.xib */,
 				18EDBDA91D81614D008E4408 /* Camera.xcassets */,
 				18EDBDAA1D81614D008E4408 /* PLCameraViewController.swift */,
 				18EDBDAB1D81614D008E4408 /* PLCameraViewController.xib */,
 				18C9DE5F1E262E4600A9A07B /* LightStatusImagePickerController.swift */,
+				18C9DE611E271F5300A9A07B /* FilterViewController.swift */,
+				18C9DE621E271F5300A9A07B /* FilterViewController.xib */,
 			);
 			path = PLCameraViewController;
 			sourceTree = "<group>";
@@ -221,6 +227,7 @@
 				18EDBDC51D8172D1008E4408 /* icon_turn.png in Resources */,
 				18EDBDD31D817435008E4408 /* icon_upload_photos@3x.png in Resources */,
 				18EDBDD21D817435008E4408 /* icon_upload_photos@2x.png in Resources */,
+				18C9DE641E271F5300A9A07B /* FilterViewController.xib in Resources */,
 				18EDBDAC1D81614D008E4408 /* Camera.xcassets in Resources */,
 				18EDBDCC1D8173E6008E4408 /* icon_close@2x.png in Resources */,
 				18EDBDC41D8172D1008E4408 /* icon_flash_3@3x.png in Resources */,
@@ -239,7 +246,7 @@
 				18EDBDC61D8172D1008E4408 /* icon_turn@2x.png in Resources */,
 				18EDBDC31D8172D1008E4408 /* icon_flash_3@2x.png in Resources */,
 				18EDBDCB1D8173E6008E4408 /* icon_close.png in Resources */,
-				18C9DE5E1E262B0C00A9A07B /* ConfirmViewController.xib in Resources */,
+				18C9DE5E1E262B0C00A9A07B /* CropViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,7 +257,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18C9DE5D1E262B0C00A9A07B /* ConfirmViewController.swift in Sources */,
+				18C9DE631E271F5300A9A07B /* FilterViewController.swift in Sources */,
+				18C9DE5D1E262B0C00A9A07B /* CropViewController.swift in Sources */,
 				E56226991D7BEAD600DD1E36 /* ViewController.swift in Sources */,
 				18C9DE601E262E4600A9A07B /* LightStatusImagePickerController.swift in Sources */,
 				E56226971D7BEAD600DD1E36 /* AppDelegate.swift in Sources */,
