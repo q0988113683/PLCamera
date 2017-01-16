@@ -438,7 +438,7 @@ extension PLCameraViewController : UIImagePickerControllerDelegate , UINavigatio
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image:UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         if (image.size.width != image.size.height){
-            //self.stopCamera()
+        
             self.dismiss(animated: true, completion: nil);
             
             let imageUrl = info["UIImagePickerControllerReferenceURL"]
@@ -454,7 +454,7 @@ extension PLCameraViewController : UIImagePickerControllerDelegate , UINavigatio
                         let filterController = FilterViewController(image: image)
                         
                         filterController.onComplete = { image in
-                             if var image = image {
+                             if let image = image {
                                 self.onCompletion!(image)
                                 self.stopCamera()
                              }else{
@@ -481,11 +481,27 @@ extension PLCameraViewController : UIImagePickerControllerDelegate , UINavigatio
                 self.dismiss(animated: true, completion: nil);
             }
         }else{
-            
-            
-            self.onCompletion!(self.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight))
-            self.stopCamera()
             self.dismiss(animated: true, completion: nil);
+            let filterController = FilterViewController(image: image)
+            
+            filterController.onComplete = { image in
+                if var image = image {
+                    
+                    if (image.size.width > self.widthAndHeight){
+                         image = self.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight)
+                    }
+                    
+                    self.onCompletion!(image)
+                    self.stopCamera()
+                }else{
+                }
+                self.dismiss(animated: true, completion: nil);
+            }
+            
+            filterController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            let nav = UINavigationController(rootViewController: filterController)
+            nav.navigationBar.barTintColor = UIColor.black
+            self.present(nav, animated: true, completion: nil)
         }
     }
 

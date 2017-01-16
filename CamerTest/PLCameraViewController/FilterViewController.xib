@@ -43,7 +43,7 @@
                     </constraints>
                 </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="goA-DJ-eM4">
-                    <rect key="frame" x="101.5" y="583" width="64" height="64"/>
+                    <rect key="frame" x="102" y="583" width="64" height="64"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="64" id="jTD-UZ-hpP"/>
                         <constraint firstAttribute="width" constant="64" id="wOc-Sz-fhN"/>
@@ -54,7 +54,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c7r-3t-zhg">
-                    <rect key="frame" x="225.5" y="583" width="64" height="64"/>
+                    <rect key="frame" x="226" y="583" width="64" height="64"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="64" id="6U6-yi-EQb"/>
                         <constraint firstAttribute="height" constant="64" id="I6Q-Au-1eg"/>

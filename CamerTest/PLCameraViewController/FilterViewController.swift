@@ -19,27 +19,81 @@ class FilterViewController: UIViewController {
     
     public var onComplete: TakeCameraCompletion?
     
+//    var CIFilterNames = [
+//        "Original" : "CIPhotoEffectChrome", //1 Original
+//        "Lo-Fi" : "CIPhotoEffectFade",   //2 Lo-Fi
+//        "Twilight" : "CIPhotoEffectInstant",//3 Twilight
+//        "Darkness" : "CIPhotoEffectProcess",//5 Darkness
+//        "Warm" : "CIPhotoEffectTransfer",//7 Warm
+//        "Sunset" : "CIColorCrossPolynomial",//9 Sunset
+//    ]
+    
     var CIFilterNames = [
-        "CIPhotoEffectChrome",
-        "CIPhotoEffectFade",
-        "CIPhotoEffectInstant",
-        "CIPhotoEffectNoir",
-        "CIPhotoEffectProcess",
-        "CIPhotoEffectTonal",
-        "CIPhotoEffectTransfer",
-        "CISepiaTone",
-        "CIColorCrossPolynomial",
-        "CIColorCube",
-        "CIColorCubeWithColorSpace",
-        "CIColorInvert",
-        "CIColorMonochrome",
-        "CIColorPosterize",
-        "CIFalseColor",
-        "CIMaximumComponent",
-        "CIMinimumComponent",
-        "CIVignetteEffect",
-        "CIVignette"
+        "CIPhotoEffectChrome", //1 Original
+        "CIPhotoEffectFade",   //2 Lo-Fi
+        "CIPhotoEffectInstant",//3 Twilight
+        
+        "CIPhotoEffectProcess",//5 Darkness
+        
+        "CIPhotoEffectTransfer",//7 Warm
+       
+        "CIColorCrossPolynomial"//9 Sunset
+       
     ]
+    
+    var CIFilterkey = [
+        "Original", //1 Original
+        "Lo-Fi",   //2 Lo-Fi
+        "Twilight",//3 Twilight
+        "Darkness",//5 Darkness
+        "Warm",//7 Warm
+        "Sunset"//9 Sunset
+        
+    ]
+    
+//    var CIFilterNames = [
+//        "CIPhotoEffectChrome", //1 Original
+//        "CIPhotoEffectFade",   //2 Lo-Fi
+//        "CIPhotoEffectInstant",//3 Twilight
+//        "CIPhotoEffectNoir",
+//        "CIPhotoEffectProcess",//5 Darkness
+//        "CIPhotoEffectTonal",
+//        "CIPhotoEffectTransfer",//7 Warm
+//        "CISepiaTone",
+//        "CIColorCrossPolynomial",//9 Sunset
+//        "CIColorCube",
+//        "CIColorCubeWithColorSpace",
+//        "CIColorInvert",
+//        "CIColorMonochrome",
+//        "CIColorPosterize",
+//        "CIFalseColor",
+//        "CIMaximumComponent",
+//        "CIMinimumComponent",
+//        "CIVignetteEffect",
+//        "CIVignette"
+//    ]
+//    
+//    var CIFilterkey = [
+//        "CIPhotoEffectChrome", //1 Original
+//        "CIPhotoEffectFade",   //2 Lo-Fi
+//        "CIPhotoEffectInstant",//3 Twilight
+//        "CIPhotoEffectNoir",
+//        "CIPhotoEffectProcess",//5 Darkness
+//        "CIPhotoEffectTonal",
+//        "CIPhotoEffectTransfer",//7 Warm
+//        "CISepiaTone",
+//        "CIColorCrossPolynomial",//9 Sunset
+//        "CIColorCube",
+//        "CIColorCubeWithColorSpace",
+//        "CIColorInvert",
+//        "CIColorMonochrome",
+//        "CIColorPosterize",
+//        "CIFalseColor",
+//        "CIMaximumComponent",
+//        "CIMinimumComponent",
+//        "CIVignetteEffect",
+//        "CIVignette"
+//    ]
     
     public init(image:UIImage) {
         self.origanImage  = image
@@ -55,6 +109,8 @@ class FilterViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.originalImage.image = self.origanImage
+        
+        
         var xCoord: CGFloat = 5
         let yCoord: CGFloat = 5
         let buttonWidth:CGFloat = 70
@@ -63,8 +119,9 @@ class FilterViewController: UIViewController {
         
         var itemCount = 0
         
-        for i in 0..<CIFilterNames.count {
-            itemCount = i
+        //for i in 0..<CIFilterNames.count {
+         for filterItem in  CIFilterNames{
+            
             
             // Button properties
             let filterButton = UIButton(type: .custom)
@@ -78,23 +135,38 @@ class FilterViewController: UIViewController {
             // CODE FOR FILTERS WILL BE ADDED HERE...
             // Create filters for each button
             let ciContext = CIContext(options: nil)
-            let coreImage = CIImage(image: originalImage.image!)
-            print(CIFilterNames[i])
-            let filter = CIFilter(name: "\(CIFilterNames[i])" )
+            let coreImage = CIImage(cgImage: originalImage.image!, options: .)
+            
+            print("key:" + CIFilterkey[itemCount])
+            print("value:" + filterItem)
+            let filter = CIFilter(name: "\(filterItem)" )
             filter!.setDefaults()
             filter!.setValue(coreImage, forKey: kCIInputImageKey)
             let filteredImageData = filter!.value(forKey: kCIOutputImageKey) as! CIImage
             let filteredImageRef = ciContext.createCGImage(filteredImageData, from: filteredImageData.extent)
             let imageForButton = UIImage(cgImage: filteredImageRef!);
-            filterButton.setBackgroundImage(imageForButton, for: .normal)
-            xCoord +=  buttonWidth + gapBetweenButtons
+            filterButton.setImage(imageForButton, for: .normal)
+            
+            
+            let labText = UILabel(frame: CGRect(x: xCoord, y: yCoord, width: 100 , height: 20))
+            labText.textColor = UIColor.white
+            labText.text = CIFilterkey[itemCount]
+            labText.font = UIFont.systemFont(ofSize: 12)
+            labText.sizeToFit()
+            labText.center = filterButton.center
+            labText.frame.origin.y = labText.frame.origin.y + 50
+            
+            
+             xCoord +=  buttonWidth + gapBetweenButtons
             filtersScrollView.addSubview(filterButton)
+            filtersScrollView.addSubview(labText)
+            itemCount = itemCount + 1
         } // END FOR LOOP
+    
         
         
         // Resize Scroll View
-        filtersScrollView.contentSize = CGSize(width: buttonWidth * CGFloat(itemCount+2)+30, height: yCoord)
-        
+        filtersScrollView.contentSize = CGSize(width: (buttonWidth) * CGFloat(itemCount) + 35, height: yCoord + 40)
         
     }
 
@@ -111,7 +183,7 @@ class FilterViewController: UIViewController {
     func filterButtonTapped(sender: UIButton) {
         let button = sender as UIButton
         
-        imageToFilter.image = button.backgroundImage(for: UIControlState.normal)
+        imageToFilter.image = button.imageView?.image
     }
 
     @IBAction func confirmPhoto() {
