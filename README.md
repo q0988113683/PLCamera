@@ -1,11 +1,8 @@
 ## PLCamera
 Customized Square Camera for Swift - easy to use
 
-
-## Photo
-
-![](https://github.com/q0988113683/PLCamera/blob/master/CameraVideo720.gif)
-
+## Preview
+<img src="https://github.com/q0988113683/PLCamera/blob/master/CameraVideo720.gif" width="340px">
 
 ## Requirements
 iOS 9.0+
