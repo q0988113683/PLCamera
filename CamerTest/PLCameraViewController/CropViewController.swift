@@ -63,7 +63,6 @@ public class CropViewController: UIViewController, UIScrollViewDelegate {
         self.configureWithImage(self.origanImage)
         self.hideSpinner(spinner)
         self.enable()
-        
     }
     
     public override func viewWillLayoutSubviews() {
@@ -118,7 +117,6 @@ public class CropViewController: UIViewController, UIScrollViewDelegate {
         } else {
             cropOverlay.isHidden = true
         }
-        
         
         imageView.image = image
         imageView.sizeToFit()
@@ -199,7 +197,6 @@ public class CropViewController: UIViewController, UIScrollViewDelegate {
         showSpinner()
         
         if allowsCropping {
-            
             var cropRect = cropOverlay.frame
             cropRect.origin.x += scrollView.contentOffset.x
             cropRect.origin.y += scrollView.contentOffset.y
@@ -232,7 +229,6 @@ public class CropViewController: UIViewController, UIScrollViewDelegate {
         
         let targetSize = CGSize(width: dimension, height: dimension)
         
-        
         PHImageManager.default().requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: options) { image, _ in
             if let image = image {
                 self.onComplete!(image)
@@ -251,7 +247,7 @@ public class CropViewController: UIViewController, UIScrollViewDelegate {
         centerScrollViewContents()
     }
     
-    func showSpinner() -> UIActivityIndicatorView {
+   @discardableResult func showSpinner() -> UIActivityIndicatorView{
         let spinner = UIActivityIndicatorView()
         spinner.activityIndicatorViewStyle = .white
         spinner.center = view.center
@@ -259,7 +255,7 @@ public class CropViewController: UIViewController, UIScrollViewDelegate {
         
         view.addSubview(spinner)
         view.bringSubview(toFront: spinner)
-        
+      
         return spinner
     }
     
@@ -275,7 +271,6 @@ public class CropViewController: UIViewController, UIScrollViewDelegate {
     func enable() {
         confirmButton.isEnabled = true
     }
-    
     
     internal func normalizedRect(_ rect: CGRect, orientation: UIImageOrientation) -> CGRect {
         let normalizedX = rect.origin.x

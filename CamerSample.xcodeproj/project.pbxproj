@@ -34,6 +34,26 @@
 		18EDBDD11D817435008E4408 /* icon_upload_photos.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EDBDCE1D817435008E4408 /* icon_upload_photos.png */; };
 		18EDBDD21D817435008E4408 /* icon_upload_photos@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EDBDCF1D817435008E4408 /* icon_upload_photos@2x.png */; };
 		18EDBDD31D817435008E4408 /* icon_upload_photos@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EDBDD01D817435008E4408 /* icon_upload_photos@3x.png */; };
+		E502A3531E69527400A06B9C /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E502A34D1E69527400A06B9C /* FilterCollectionViewCell.swift */; };
+		E502A3541E69527400A06B9C /* FilterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E502A34E1E69527400A06B9C /* FilterCollectionViewCell.xib */; };
+		E502A3561E69527400A06B9C /* PLCameraTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E502A3521E69527400A06B9C /* PLCameraTool.swift */; };
+		E502A3601E69800300A06B9C /* brightness.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A3571E69800300A06B9C /* brightness.png */; };
+		E502A3611E69800300A06B9C /* brightness@2x.png.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A3581E69800300A06B9C /* brightness@2x.png.png */; };
+		E502A3621E69800300A06B9C /* brightness@3x.png.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A3591E69800300A06B9C /* brightness@3x.png.png */; };
+		E502A3631E69800300A06B9C /* contrast.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A35A1E69800300A06B9C /* contrast.png */; };
+		E502A3641E69800300A06B9C /* contrast@2x.png.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A35B1E69800300A06B9C /* contrast@2x.png.png */; };
+		E502A3651E69800300A06B9C /* contrast@3x.png.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A35C1E69800300A06B9C /* contrast@3x.png.png */; };
+		E502A3661E69800300A06B9C /* saturation.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A35D1E69800300A06B9C /* saturation.png */; };
+		E502A3671E69800300A06B9C /* saturation@2x.png.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A35E1E69800300A06B9C /* saturation@2x.png.png */; };
+		E502A3681E69800300A06B9C /* saturation@3x.png.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A35F1E69800300A06B9C /* saturation@3x.png.png */; };
+		E502A36B1E69897B00A06B9C /* FilterSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E502A3691E69897B00A06B9C /* FilterSettingViewController.swift */; };
+		E502A36C1E69897B00A06B9C /* FilterSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E502A36A1E69897B00A06B9C /* FilterSettingViewController.xib */; };
+		E502A3731E698D6700A06B9C /* photo_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A36D1E698D6700A06B9C /* photo_cancel.png */; };
+		E502A3741E698D6700A06B9C /* photo_cancel@2x.png.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A36E1E698D6700A06B9C /* photo_cancel@2x.png.png */; };
+		E502A3751E698D6700A06B9C /* photo_cancel@3x.png.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A36F1E698D6700A06B9C /* photo_cancel@3x.png.png */; };
+		E502A3761E698D6700A06B9C /* photo_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A3701E698D6700A06B9C /* photo_ok.png */; };
+		E502A3771E698D6700A06B9C /* photo_ok@2x.png.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A3711E698D6700A06B9C /* photo_ok@2x.png.png */; };
+		E502A3781E698D6700A06B9C /* photo_ok@3x.png.png in Resources */ = {isa = PBXBuildFile; fileRef = E502A3721E698D6700A06B9C /* photo_ok@3x.png.png */; };
 		E56226971D7BEAD600DD1E36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56226961D7BEAD600DD1E36 /* AppDelegate.swift */; };
 		E56226991D7BEAD600DD1E36 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56226981D7BEAD600DD1E36 /* ViewController.swift */; };
 		E562269C1D7BEAD600DD1E36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E562269A1D7BEAD600DD1E36 /* Main.storyboard */; };
@@ -69,6 +89,26 @@
 		18EDBDCE1D817435008E4408 /* icon_upload_photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_upload_photos.png; sourceTree = "<group>"; };
 		18EDBDCF1D817435008E4408 /* icon_upload_photos@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_upload_photos@2x.png"; sourceTree = "<group>"; };
 		18EDBDD01D817435008E4408 /* icon_upload_photos@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_upload_photos@3x.png"; sourceTree = "<group>"; };
+		E502A34D1E69527400A06B9C /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
+		E502A34E1E69527400A06B9C /* FilterCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterCollectionViewCell.xib; sourceTree = "<group>"; };
+		E502A3521E69527400A06B9C /* PLCameraTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PLCameraTool.swift; sourceTree = "<group>"; };
+		E502A3571E69800300A06B9C /* brightness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brightness.png; sourceTree = "<group>"; };
+		E502A3581E69800300A06B9C /* brightness@2x.png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "brightness@2x.png.png"; sourceTree = "<group>"; };
+		E502A3591E69800300A06B9C /* brightness@3x.png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "brightness@3x.png.png"; sourceTree = "<group>"; };
+		E502A35A1E69800300A06B9C /* contrast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contrast.png; sourceTree = "<group>"; };
+		E502A35B1E69800300A06B9C /* contrast@2x.png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contrast@2x.png.png"; sourceTree = "<group>"; };
+		E502A35C1E69800300A06B9C /* contrast@3x.png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contrast@3x.png.png"; sourceTree = "<group>"; };
+		E502A35D1E69800300A06B9C /* saturation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saturation.png; sourceTree = "<group>"; };
+		E502A35E1E69800300A06B9C /* saturation@2x.png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "saturation@2x.png.png"; sourceTree = "<group>"; };
+		E502A35F1E69800300A06B9C /* saturation@3x.png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "saturation@3x.png.png"; sourceTree = "<group>"; };
+		E502A3691E69897B00A06B9C /* FilterSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSettingViewController.swift; sourceTree = "<group>"; };
+		E502A36A1E69897B00A06B9C /* FilterSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterSettingViewController.xib; sourceTree = "<group>"; };
+		E502A36D1E698D6700A06B9C /* photo_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_cancel.png; sourceTree = "<group>"; };
+		E502A36E1E698D6700A06B9C /* photo_cancel@2x.png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_cancel@2x.png.png"; sourceTree = "<group>"; };
+		E502A36F1E698D6700A06B9C /* photo_cancel@3x.png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_cancel@3x.png.png"; sourceTree = "<group>"; };
+		E502A3701E698D6700A06B9C /* photo_ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_ok.png; sourceTree = "<group>"; };
+		E502A3711E698D6700A06B9C /* photo_ok@2x.png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_ok@2x.png.png"; sourceTree = "<group>"; };
+		E502A3721E698D6700A06B9C /* photo_ok@3x.png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_ok@3x.png.png"; sourceTree = "<group>"; };
 		E56226931D7BEAD600DD1E36 /* CamerSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CamerSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E56226961D7BEAD600DD1E36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E56226981D7BEAD600DD1E36 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +132,8 @@
 		18EDBDA81D81614D008E4408 /* PLCameraViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E502A34C1E69527400A06B9C /* Cell */,
+				E502A34F1E69527400A06B9C /* Tool */,
 				18C9DE591E262B0C00A9A07B /* CropOverlay.swift */,
 				18C9DE5A1E262B0C00A9A07B /* CropViewController.swift */,
 				18C9DE5B1E262B0C00A9A07B /* CropViewController.xib */,
@@ -101,6 +143,8 @@
 				18C9DE5F1E262E4600A9A07B /* LightStatusImagePickerController.swift */,
 				18C9DE611E271F5300A9A07B /* FilterViewController.swift */,
 				18C9DE621E271F5300A9A07B /* FilterViewController.xib */,
+				E502A3691E69897B00A06B9C /* FilterSettingViewController.swift */,
+				E502A36A1E69897B00A06B9C /* FilterSettingViewController.xib */,
 			);
 			path = PLCameraViewController;
 			sourceTree = "<group>";
@@ -108,6 +152,21 @@
 		18EDBDAF1D8172C5008E4408 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				E502A36D1E698D6700A06B9C /* photo_cancel.png */,
+				E502A36E1E698D6700A06B9C /* photo_cancel@2x.png.png */,
+				E502A36F1E698D6700A06B9C /* photo_cancel@3x.png.png */,
+				E502A3701E698D6700A06B9C /* photo_ok.png */,
+				E502A3711E698D6700A06B9C /* photo_ok@2x.png.png */,
+				E502A3721E698D6700A06B9C /* photo_ok@3x.png.png */,
+				E502A3571E69800300A06B9C /* brightness.png */,
+				E502A3581E69800300A06B9C /* brightness@2x.png.png */,
+				E502A3591E69800300A06B9C /* brightness@3x.png.png */,
+				E502A35A1E69800300A06B9C /* contrast.png */,
+				E502A35B1E69800300A06B9C /* contrast@2x.png.png */,
+				E502A35C1E69800300A06B9C /* contrast@3x.png.png */,
+				E502A35D1E69800300A06B9C /* saturation.png */,
+				E502A35E1E69800300A06B9C /* saturation@2x.png.png */,
+				E502A35F1E69800300A06B9C /* saturation@3x.png.png */,
 				18EDBDCE1D817435008E4408 /* icon_upload_photos.png */,
 				18EDBDCF1D817435008E4408 /* icon_upload_photos@2x.png */,
 				18EDBDD01D817435008E4408 /* icon_upload_photos@3x.png */,
@@ -128,6 +187,23 @@
 				18EDBDBB1D8172D1008E4408 /* icon_turn@3x.png */,
 			);
 			name = Icon;
+			sourceTree = "<group>";
+		};
+		E502A34C1E69527400A06B9C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E502A34D1E69527400A06B9C /* FilterCollectionViewCell.swift */,
+				E502A34E1E69527400A06B9C /* FilterCollectionViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		E502A34F1E69527400A06B9C /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				E502A3521E69527400A06B9C /* PLCameraTool.swift */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		E562268A1D7BEAD600DD1E36 = {
@@ -224,26 +300,43 @@
 			files = (
 				18EDBDBD1D8172D1008E4408 /* icon_flash_1@2x.png in Resources */,
 				18EDBDC11D8172D1008E4408 /* icon_flash_2@3x.png in Resources */,
+				E502A3771E698D6700A06B9C /* photo_ok@2x.png.png in Resources */,
 				18EDBDC51D8172D1008E4408 /* icon_turn.png in Resources */,
+				E502A3671E69800300A06B9C /* saturation@2x.png.png in Resources */,
+				E502A3601E69800300A06B9C /* brightness.png in Resources */,
 				18EDBDD31D817435008E4408 /* icon_upload_photos@3x.png in Resources */,
+				E502A3641E69800300A06B9C /* contrast@2x.png.png in Resources */,
+				E502A3631E69800300A06B9C /* contrast.png in Resources */,
 				18EDBDD21D817435008E4408 /* icon_upload_photos@2x.png in Resources */,
 				18C9DE641E271F5300A9A07B /* FilterViewController.xib in Resources */,
 				18EDBDAC1D81614D008E4408 /* Camera.xcassets in Resources */,
+				E502A36C1E69897B00A06B9C /* FilterSettingViewController.xib in Resources */,
 				18EDBDCC1D8173E6008E4408 /* icon_close@2x.png in Resources */,
+				E502A3661E69800300A06B9C /* saturation.png in Resources */,
 				18EDBDC41D8172D1008E4408 /* icon_flash_3@3x.png in Resources */,
+				E502A3611E69800300A06B9C /* brightness@2x.png.png in Resources */,
 				18EDBDBC1D8172D1008E4408 /* icon_flash_1.png in Resources */,
+				E502A3621E69800300A06B9C /* brightness@3x.png.png in Resources */,
+				E502A3761E698D6700A06B9C /* photo_ok.png in Resources */,
 				E56226A11D7BEAD600DD1E36 /* LaunchScreen.storyboard in Resources */,
 				E562269E1D7BEAD600DD1E36 /* Assets.xcassets in Resources */,
 				18EDBDC01D8172D1008E4408 /* icon_flash_2@2x.png in Resources */,
+				E502A3651E69800300A06B9C /* contrast@3x.png.png in Resources */,
 				18EDBDC21D8172D1008E4408 /* icon_flash_3.png in Resources */,
 				18EDBDAE1D81614D008E4408 /* PLCameraViewController.xib in Resources */,
 				E562269C1D7BEAD600DD1E36 /* Main.storyboard in Resources */,
+				E502A3751E698D6700A06B9C /* photo_cancel@3x.png.png in Resources */,
+				E502A3541E69527400A06B9C /* FilterCollectionViewCell.xib in Resources */,
 				18EDBDCD1D8173E6008E4408 /* icon_close@3x.png in Resources */,
+				E502A3681E69800300A06B9C /* saturation@3x.png.png in Resources */,
+				E502A3731E698D6700A06B9C /* photo_cancel.png in Resources */,
 				18EDBDD11D817435008E4408 /* icon_upload_photos.png in Resources */,
+				E502A3781E698D6700A06B9C /* photo_ok@3x.png.png in Resources */,
 				18EDBDBF1D8172D1008E4408 /* icon_flash_2.png in Resources */,
 				18EDBDC71D8172D1008E4408 /* icon_turn@3x.png in Resources */,
 				18EDBDBE1D8172D1008E4408 /* icon_flash_1@3x.png in Resources */,
 				18EDBDC61D8172D1008E4408 /* icon_turn@2x.png in Resources */,
+				E502A3741E698D6700A06B9C /* photo_cancel@2x.png.png in Resources */,
 				18EDBDC31D8172D1008E4408 /* icon_flash_3@2x.png in Resources */,
 				18EDBDCB1D8173E6008E4408 /* icon_close.png in Resources */,
 				18C9DE5E1E262B0C00A9A07B /* CropViewController.xib in Resources */,
@@ -260,9 +353,12 @@
 				18C9DE631E271F5300A9A07B /* FilterViewController.swift in Sources */,
 				18C9DE5D1E262B0C00A9A07B /* CropViewController.swift in Sources */,
 				E56226991D7BEAD600DD1E36 /* ViewController.swift in Sources */,
+				E502A3561E69527400A06B9C /* PLCameraTool.swift in Sources */,
 				18C9DE601E262E4600A9A07B /* LightStatusImagePickerController.swift in Sources */,
 				E56226971D7BEAD600DD1E36 /* AppDelegate.swift in Sources */,
 				18C9DE5C1E262B0C00A9A07B /* CropOverlay.swift in Sources */,
+				E502A36B1E69897B00A06B9C /* FilterSettingViewController.swift in Sources */,
+				E502A3531E69527400A06B9C /* FilterCollectionViewCell.swift in Sources */,
 				18EDBDAD1D81614D008E4408 /* PLCameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,7 +480,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = ZA9FSW44BV;
+				DEVELOPMENT_TEAM = 7QAS5EJPC9;
 				INFOPLIST_FILE = CamerTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -400,7 +496,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = ZA9FSW44BV;
+				DEVELOPMENT_TEAM = 7QAS5EJPC9;
 				INFOPLIST_FILE = CamerTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

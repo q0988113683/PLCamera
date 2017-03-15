@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FilterSettingViewController" customModule="CamerSample" customModuleProvider="target">
+            <connections>
+                <outlet property="imageToFilter" destination="qZf-QL-qWy" id="H1c-PB-AbD"/>
+                <outlet property="slider" destination="jFJ-hm-Vu4" id="F6R-eG-Vi6"/>
+                <outlet property="view" destination="FYf-hT-B8h" id="Mo2-as-nUj"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="FYf-hT-B8h">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qZf-QL-qWy">
+                    <rect key="frame" x="0.0" y="80" width="375" height="375"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="qZf-QL-qWy" secondAttribute="height" multiplier="1:1" id="8cD-1y-C2N"/>
+                    </constraints>
+                </imageView>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jFJ-hm-Vu4">
+                    <rect key="frame" x="14" y="527" width="347" height="31"/>
+                    <color key="tintColor" red="0.98823529409999999" green="0.66274509800000003" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                </slider>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eif-h7-srV">
+                    <rect key="frame" x="0.0" y="627" width="375" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6FP-yr-vr0">
+                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="40"/>
+                            <state key="normal" image="photo_cancel.png"/>
+                            <connections>
+                                <action selector="disminssViewWithSender:" destination="-1" eventType="touchUpInside" id="Hlr-ma-O5K"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZ1-Os-jPZ">
+                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="40"/>
+                            <state key="normal" image="photo_ok.png"/>
+                            <connections>
+                                <action selector="submitViewWithSender:" destination="-1" eventType="touchUpInside" id="5uL-ME-JjN"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="LZ1-Os-jPZ" firstAttribute="leading" secondItem="6FP-yr-vr0" secondAttribute="trailing" id="9r0-FA-duQ"/>
+                        <constraint firstAttribute="bottom" secondItem="LZ1-Os-jPZ" secondAttribute="bottom" id="JM8-6u-2H8"/>
+                        <constraint firstAttribute="trailing" secondItem="LZ1-Os-jPZ" secondAttribute="trailing" id="aDJ-mG-7Wz"/>
+                        <constraint firstAttribute="height" constant="40" id="gAo-9Y-Eg6"/>
+                        <constraint firstAttribute="bottom" secondItem="6FP-yr-vr0" secondAttribute="bottom" id="hLV-Gd-6YM"/>
+                        <constraint firstItem="LZ1-Os-jPZ" firstAttribute="width" secondItem="6FP-yr-vr0" secondAttribute="width" id="l6i-hl-n1A"/>
+                        <constraint firstItem="LZ1-Os-jPZ" firstAttribute="top" secondItem="Eif-h7-srV" secondAttribute="top" id="shC-6V-OCp"/>
+                        <constraint firstItem="6FP-yr-vr0" firstAttribute="top" secondItem="Eif-h7-srV" secondAttribute="top" id="xYI-Q3-M9R"/>
+                        <constraint firstItem="6FP-yr-vr0" firstAttribute="leading" secondItem="Eif-h7-srV" secondAttribute="leading" id="zuM-FP-6Nf"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Eif-h7-srV" firstAttribute="leading" secondItem="FYf-hT-B8h" secondAttribute="leading" id="FYD-jl-2wp"/>
+                <constraint firstAttribute="trailing" secondItem="jFJ-hm-Vu4" secondAttribute="trailing" constant="16" id="S3s-bb-iyn"/>
+                <constraint firstItem="qZf-QL-qWy" firstAttribute="width" secondItem="qZf-QL-qWy" secondAttribute="height" multiplier="1:1" id="SXq-PL-GDL"/>
+                <constraint firstAttribute="bottom" secondItem="Eif-h7-srV" secondAttribute="bottom" id="b9f-0g-vsE"/>
+                <constraint firstAttribute="trailing" secondItem="qZf-QL-qWy" secondAttribute="trailing" id="d9v-jm-Kcf"/>
+                <constraint firstItem="Eif-h7-srV" firstAttribute="top" secondItem="jFJ-hm-Vu4" secondAttribute="bottom" constant="70" id="eY0-26-tXt"/>
+                <constraint firstItem="jFJ-hm-Vu4" firstAttribute="leading" secondItem="FYf-hT-B8h" secondAttribute="leading" constant="16" id="kpc-Up-Zhf"/>
+                <constraint firstItem="qZf-QL-qWy" firstAttribute="leading" secondItem="FYf-hT-B8h" secondAttribute="leading" id="l4g-Q8-ibe"/>
+                <constraint firstItem="qZf-QL-qWy" firstAttribute="top" secondItem="FYf-hT-B8h" secondAttribute="top" constant="80" id="ltM-Ip-lxP"/>
+                <constraint firstAttribute="trailing" secondItem="Eif-h7-srV" secondAttribute="trailing" id="mMm-b7-wFM"/>
+                <constraint firstItem="jFJ-hm-Vu4" firstAttribute="centerX" secondItem="FYf-hT-B8h" secondAttribute="centerX" id="pys-pc-jhg"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <point key="canvasLocation" x="-164.5" y="71.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="photo_cancel.png" width="28" height="28"/>
+        <image name="photo_ok.png" width="28" height="28"/>
+    </resources>
+</document>

@@ -12,20 +12,27 @@ public typealias TakeCameraCompletion = (UIImage?) -> Void
 
 class PLCameraViewController: UIViewController{
     
-    
     @IBOutlet weak var PLView: UIView!
     var onCompletion: TakeCameraCompletion?
+    
+    //data session
     var session: AVCaptureSession?
+    var prevLayer: AVCaptureVideoPreviewLayer?
+    
+    //input
     var device: AVCaptureDevice?
     var input: AVCaptureDeviceInput?
+    
+    //ouput
     var imageOutput: AVCaptureStillImageOutput!
-    var prevLayer: AVCaptureVideoPreviewLayer?
+
+    //default value
     var widthAndHeight : CGFloat = 500
     var switchCamera  = false
+    var isCloseCamera = false
     @IBOutlet weak var focusView: UIView!
     @IBOutlet weak var btnFlash: UIButton!
     
-    var isCloseCamera = false
     
     init(WidthAndHeight: CGFloat , completion: @escaping TakeCameraCompletion) {
         super.init(nibName: nil, bundle: nil)
@@ -51,7 +58,6 @@ class PLCameraViewController: UIViewController{
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         createSession()
@@ -59,7 +65,6 @@ class PLCameraViewController: UIViewController{
         focusView.layer.borderWidth = 1.0
         focusView.layer.borderColor = UIColor(red: 181.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0).cgColor
         focusView.isHidden = true
-        
         
         if let gestureRecognizers = self.view.gestureRecognizers {
             gestureRecognizers.forEach({ self.view.removeGestureRecognizer($0) })
@@ -74,7 +79,6 @@ class PLCameraViewController: UIViewController{
         }
     }
     
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -82,9 +86,7 @@ class PLCameraViewController: UIViewController{
             self.ShowOpenCameraAlert()
         }
         
-        
         prevLayer?.frame.size = PLView.frame.size
-        
         self.focusCamera(self.PLView.center)
     }
     
@@ -146,12 +148,12 @@ class PLCameraViewController: UIViewController{
                         
                         //crop image like PLView
                         image = self.cropCameraImage(image!, previewLayer: self.prevLayer!)
-                        image = self.resizeImage(image!, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight)
+                        image = PLCameraTool.resizeImage(image!, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight)
                         
                         
                         let filterController = FilterViewController(image: image!)
                         filterController.onComplete = { image in
-                            if var image = image {
+                            if let image = image {
                                 self.onCompletion!(image)
                                 self.stopCamera()
                             }else{
@@ -161,7 +163,7 @@ class PLCameraViewController: UIViewController{
                             self.dismiss(animated: true, completion: nil);
                         }
                         let nav = UINavigationController(rootViewController: filterController)
-                        nav.navigationBar.barTintColor = UIColor.black
+                        nav.navigationBar.isHidden = true
                         self.present(nav, animated: true, completion: nil)
                         
                         
@@ -301,22 +303,6 @@ class PLCameraViewController: UIViewController{
         return image
     }
     
-    func resizeImage(_ image: UIImage, newWidthX: CGFloat , newHeightX: CGFloat) -> UIImage {
-        var newWidth = newWidthX
-        var newHeight = newHeightX
-        if (image.size.width < newWidth){
-            newWidth = image.size.width
-            newHeight = image.size.width
-        }
-        //        let scale = newWidth / image.size.width
-        //        let newHeight = image.size.height * scale
-        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
-        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage!
-    }
-    
     func stopCamera() {
         self.session?.stopRunning()
         self.prevLayer?.removeFromSuperlayer()
@@ -348,7 +334,6 @@ class PLCameraViewController: UIViewController{
         let outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
         imageOutput = AVCaptureStillImageOutput()
         imageOutput.outputSettings = outputSettings
-        
         session!.addOutput(imageOutput)
         
         prevLayer = AVCaptureVideoPreviewLayer(session: session)
@@ -449,7 +434,7 @@ extension PLCameraViewController : UIImagePickerControllerDelegate , UINavigatio
                 confirmController.onComplete = { image in
                    
                     if var image = image {
-                        image = self.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight)
+                        image = PLCameraTool.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight)
                         
                         let filterController = FilterViewController(image: image)
                         
@@ -461,6 +446,8 @@ extension PLCameraViewController : UIImagePickerControllerDelegate , UINavigatio
                             }
                             self.dismiss(animated: true, completion: nil);
                         }
+                        
+                        confirmController.navigationController?.isNavigationBarHidden = true
                         confirmController.navigationController?.pushViewController(filterController, animated: true)
                         
                       
@@ -476,7 +463,7 @@ extension PLCameraViewController : UIImagePickerControllerDelegate , UINavigatio
                 
             }else{
                 
-                self.onCompletion!(self.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight))
+                self.onCompletion!(PLCameraTool.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight))
                 self.stopCamera()
                 self.dismiss(animated: true, completion: nil);
             }
@@ -488,7 +475,7 @@ extension PLCameraViewController : UIImagePickerControllerDelegate , UINavigatio
                 if var image = image {
                     
                     if (image.size.width > self.widthAndHeight){
-                         image = self.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight)
+                         image = PLCameraTool.resizeImage(image, newWidthX: self.widthAndHeight, newHeightX: self.widthAndHeight)
                     }
                     
                     self.onCompletion!(image)
@@ -500,7 +487,7 @@ extension PLCameraViewController : UIImagePickerControllerDelegate , UINavigatio
             
             filterController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             let nav = UINavigationController(rootViewController: filterController)
-            nav.navigationBar.barTintColor = UIColor.black
+            nav.navigationBar.isHidden = true
             self.present(nav, animated: true, completion: nil)
         }
     }
