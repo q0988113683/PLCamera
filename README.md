@@ -1,5 +1,5 @@
 ## PLCamera
-Customized Square Camera for Swift - easy to use
+Customized Square Camera with filter and crop for Swift - easy to use
 
 ## Preview
 <img src="https://github.com/q0988113683/PLCamera/blob/master/CameraVideo720.gif" width="340px">
