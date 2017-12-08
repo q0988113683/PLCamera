@@ -68,8 +68,6 @@ class FilterSettingViewController: UIViewController {
             slider.layer.cornerRadius = 15
             slider.addTarget(self, action: #selector(FilterSettingViewController.ContrastValueChanged(sender:)), for: .valueChanged)
             break
-        default:
-            break
         }
     }
 
@@ -91,17 +89,17 @@ class FilterSettingViewController: UIViewController {
         print(sender.value)
     }
     
-    func BrightnessSetting(sender:UISlider)
+    @objc func BrightnessSetting(sender:UISlider)
     {
         self.imageToFilter.image = PLCameraTool.filteredWithBrightness(self.filterOriganImage, brightnessT:sender.value)
     }
     
-    func SaturationValueChanged(sender:UISlider)
+    @objc func SaturationValueChanged(sender:UISlider)
     {
         self.imageToFilter.image = PLCameraTool.filteredWithSaturation(self.filterOriganImage, Saturation: sender.value)
     }
     
-    func ContrastValueChanged(sender:UISlider)
+    @objc func ContrastValueChanged(sender:UISlider)
     {
         self.imageToFilter.image = PLCameraTool.filteredWithContrast(self.filterOriganImage, contrastT: sender.value)
     }

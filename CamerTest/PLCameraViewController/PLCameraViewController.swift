@@ -94,7 +94,7 @@ class PLCameraViewController: UIViewController{
     // MARK: - Btn Event
     @IBAction func switchCamera(_ sender: AnyObject) {
         if let sess = session {
-            let currentCameraInput: AVCaptureInput = sess.inputs[0] as! AVCaptureInput
+            let currentCameraInput: AVCaptureInput = sess.inputs[0] 
             sess.removeInput(currentCameraInput)
             var newCamera: AVCaptureDevice
             if (currentCameraInput as! AVCaptureDeviceInput).device.position == .back {
@@ -135,12 +135,12 @@ class PLCameraViewController: UIViewController{
         }
         
         
-        if let videoConnection = imageOutput.connection(withMediaType: AVMediaTypeVideo) {
+        if let videoConnection = imageOutput.connection(with: AVMediaType.video) {
             imageOutput.captureStillImageAsynchronously(from: videoConnection) {
                 (imageDataSampleBuffer, error) -> Void in
                 
                 if (imageDataSampleBuffer != nil){
-                    let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
+                    let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer!)
                     
                     var image = UIImage(data: imageData!)
                     
@@ -208,7 +208,7 @@ class PLCameraViewController: UIViewController{
     
     
     // MARK: - Private Method
-    internal func focus(_ gesture: UITapGestureRecognizer) {
+    @objc internal func focus(_ gesture: UITapGestureRecognizer) {
         let point = gesture.location(in: self.view)
         CameraAnimaion(point)
         
@@ -263,9 +263,9 @@ class PLCameraViewController: UIViewController{
         // focus points are in the range of 0...1, not screen pixels
         let focusPoint = CGPoint(x: toPoint.x / self.view.frame.width, y: toPoint.y / self.view.frame.height)
         
-        device.focusMode = AVCaptureFocusMode.continuousAutoFocus
+        device.focusMode = AVCaptureDevice.FocusMode.continuousAutoFocus
         device.exposurePointOfInterest = focusPoint
-        device.exposureMode = AVCaptureExposureMode.continuousAutoExposure
+        device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
         device.unlockForConfiguration()
         
         return true
@@ -284,9 +284,9 @@ class PLCameraViewController: UIViewController{
         let B = CGPoint(x: previewImageLayerBounds.size.width, y: previewImageLayerBounds.origin.y)
         let D = CGPoint(x: previewImageLayerBounds.size.width, y: previewImageLayerBounds.size.height)
         
-        let a = previewLayer.captureDevicePointOfInterest(for: A)
-        let b = previewLayer.captureDevicePointOfInterest(for: B)
-        let d = previewLayer.captureDevicePointOfInterest(for: D)
+        let a = previewLayer.captureDevicePointConverted(fromLayerPoint: A)
+        let b = previewLayer.captureDevicePointConverted(fromLayerPoint: B)
+        let d = previewLayer.captureDevicePointConverted(fromLayerPoint: D)
         
         let posX = floor(b.x * originalHeight)
         let posY = floor(b.y * originalWidth)
@@ -316,10 +316,10 @@ class PLCameraViewController: UIViewController{
     
     func createSession() {
         session = AVCaptureSession()
-        device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        device = AVCaptureDevice.default(for: AVMediaType.video)
         
         do {
-            input = try AVCaptureDeviceInput(device: device)
+            input = try AVCaptureDeviceInput(device: device!)
         } catch let error as NSError {
             input = nil
             self.isCloseCamera = true
@@ -327,8 +327,8 @@ class PLCameraViewController: UIViewController{
             return
         }
         
-        if session!.canAddInput(input) {
-            session!.addInput(input)
+        if session!.canAddInput(input!) {
+            session!.addInput(input!)
         }
         
         let outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
@@ -336,9 +336,9 @@ class PLCameraViewController: UIViewController{
         imageOutput.outputSettings = outputSettings
         session!.addOutput(imageOutput)
         
-        prevLayer = AVCaptureVideoPreviewLayer(session: session)
+        prevLayer = AVCaptureVideoPreviewLayer(session: session!)
         prevLayer?.frame.size = PLView.frame.size
-        prevLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+        prevLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
         
         PLView.layer.addSublayer(prevLayer!)
         
@@ -366,11 +366,11 @@ class PLCameraViewController: UIViewController{
     }
     
     
-    func cameraWithPosition(_ position: AVCaptureDevicePosition) -> AVCaptureDevice? {
-        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
-        for device in devices! {
+    func cameraWithPosition(_ position: AVCaptureDevice.Position) -> AVCaptureDevice? {
+        let devices = AVCaptureDevice.devices(for: AVMediaType.video)
+        for device in devices {
             if (device as AnyObject).position == position {
-                return device as? AVCaptureDevice
+                return device
             }
         }
         return nil
@@ -378,7 +378,7 @@ class PLCameraViewController: UIViewController{
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: { (context) -> Void in
-            self.prevLayer?.connection.videoOrientation = self.transformOrientation(UIInterfaceOrientation(rawValue: UIApplication.shared.statusBarOrientation.rawValue)!)
+            self.prevLayer?.connection?.videoOrientation = self.transformOrientation(UIInterfaceOrientation(rawValue: UIApplication.shared.statusBarOrientation.rawValue)!)
             self.prevLayer?.frame.size = self.PLView.frame.size
         }, completion: { (context) -> Void in
             
@@ -406,7 +406,7 @@ class PLCameraViewController: UIViewController{
         imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
         imagePicker.allowsEditing = false
         imagePicker.navigationBar.barTintColor = UIColor.black
-        imagePicker.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        imagePicker.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         imagePicker.navigationBar.tintColor =  .white
         return imagePicker
         
