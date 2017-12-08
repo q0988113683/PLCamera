@@ -6,8 +6,8 @@ Customized Square Camera with filter and crop for Swift - easy to use
 
 ## Requirements
 iOS 9.0+
-Xcode 8.0+
-Swift 3.0+
+Xcode 9.1+
+Swift 4.0+
 
 ## Example:
 ```
